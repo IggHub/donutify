@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  def search
+    parameters = { term: params[:term], limit: 1 }
+    render json: Yelp.client.search(:city, parameters)
+  end
+
   # GET /posts
   # GET /posts.json
   def index
