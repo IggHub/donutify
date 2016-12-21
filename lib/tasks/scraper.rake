@@ -1,9 +1,10 @@
 namespace :scraper do
   desc "Fetch food information from yelp API"
-  task scrape: :environment do
+
+  task :scrape, [:city] => [:environment] do |t, args|
 
     ###grabs individual posting data###
-    results = Yelp.client.search('San Diego', {limit: 10, category_filter: "donuts"})
+    results = Yelp.client.search(args[:city], {limit: 10, category_filter: "donuts"})
     results.businesses.each do |result|
       #generate new post instance
       @post = Post.new
@@ -17,10 +18,12 @@ namespace :scraper do
       #save post information
       @post.save
     end
+    puts results.businesses[0]
   end
 
   desc "TODO"
   task destroy_all_posts: :environment do
+    Post.destroy_all
   end
 
 end
