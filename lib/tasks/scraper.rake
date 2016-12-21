@@ -3,7 +3,7 @@ namespace :scraper do
   task scrape: :environment do
 
     ###grabs individual posting data###
-    results = Yelp.client.search('Moreno Valley', {limit: 5, category_filter: "donuts"})
+    results = Yelp.client.search('San Diego', {limit: 10, category_filter: "donuts"})
     results.businesses.each do |result|
       #generate new post instance
       @post = Post.new
