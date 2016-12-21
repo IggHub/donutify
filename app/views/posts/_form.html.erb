@@ -12,28 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
   </div>
 
   <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url %>
   </div>
 
   <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
+    <%= f.label :open %>
+    <%= f.check_box :open %>
   </div>
 
   <div class="field">
-    <%= f.label :external_url %>
-    <%= f.text_field :external_url %>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
   </div>
 
   <div class="field">
-    <%= f.label :timestamp %>
-    <%= f.text_field :timestamp %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :rating %>
+    <%= f.text_field :rating %>
   </div>
 
   <div class="actions">

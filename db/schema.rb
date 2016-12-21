@@ -10,16 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161220004605) do
+ActiveRecord::Schema.define(version: 20161221001921) do
 
   create_table "posts", force: :cascade do |t|
-    t.text     "body"
-    t.decimal  "price"
-    t.string   "city"
-    t.string   "external_url"
-    t.string   "timestamp"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "phone"
+    t.string   "image_url"
+    t.boolean  "open"
+    t.string   "location"
+    t.string   "name"
+    t.decimal  "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

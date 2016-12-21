@@ -1,11 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-  def search
-    parameters = { term: params[:term], limit: 1 }
-    render json: Yelp.client.search(:city, parameters)
-  end
-
   # GET /posts
   # GET /posts.json
   def index
@@ -74,6 +69,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:body, :price, :city, :external_url, :timestamp)
+      params.require(:post).permit(:phone, :image_url, :open, :location, :name, :rating)
     end
 end
