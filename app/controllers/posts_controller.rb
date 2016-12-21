@@ -5,6 +5,8 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all.paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
+    @posts = Post.where(open: !params["open"]).paginate(:page => params[:page], :per_page => 10) if params["open"].present?
   end
 
   # GET /posts/1

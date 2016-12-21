@@ -1,34 +1,49 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-  <table class="table table-hover table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Open?</th>
-        <th>Phone</th>
-        <th>Rating</th>
-        <th>Location</th>
 
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <div class="filter">
+    <%= form_tag posts_path, method: :get, class: "form-inline" do %> <!-- form_tag on posts path (index), use get method since we are displaying results and not altering/ submitting new data -->
+      <div class="rating form-group">
+        <%= label_tag :rating %>
+        <%= number_field_tag :rating, params[:rating], step: 0.5, min: 0, max: 5, class: "form-control" %>
+        <%= submit_tag "Search", name: nil, class: "btn btn-primary"%>
+      </div>
+    <% end %>
+  </div>
 
-    <tbody>
-      <% @posts.each do |post| %>
+  <% if @posts.empty? %>
+    <h3>No result found</h3>
+  <% else %>
+    <table class="table table-hover table-condensed">
+      <thead>
         <tr>
-          <td><%= link_to post.name, post %></td>
-          <td><%= post.open %></td>
-          <td><%= number_to_phone(post.phone, area_code: true) %></td>
-          <td><%= post.rating %></td>
-          <td><%= post.location %></td>
+          <th>Name</th>
+          <th>Open?</th>
+          <th>Phone</th>
+          <th>Rating</th>
+          <th>Location</th>
 
-  <!--        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  -->
+          <th colspan="3"></th>
         </tr>
-      <% end %>
-    </tbody>
+      </thead>
+
+      <tbody>
+        <% @posts.each do |post| %>
+          <tr>
+            <td><%= link_to post.name, post %></td>
+            <td><%= post.open %></td>
+            <td><%= number_to_phone(post.phone, area_code: true) %></td>
+            <td><%= post.rating %></td>
+            <td><%= post.location %></td>
+
+    <!--        <td><%= link_to 'Edit', edit_post_path(post) %></td>
+            <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    -->
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
   </table>
 
   <br>
