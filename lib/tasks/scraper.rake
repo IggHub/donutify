@@ -9,7 +9,6 @@ namespace :scraper do
       #generate new post instance
       @post = Post.new
       @post.phone = result.phone
-      @post.image_url = result.image_url
       @post.open = !result.is_closed
       @post.location = result.location.display_address.join(" ")
       @post.name = result.name

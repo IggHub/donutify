@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20161221180616) do
 
   create_table "posts", force: :cascade do |t|
     t.string   "phone"
-    t.string   "image_url"
     t.boolean  "open"
     t.string   "location"
     t.string   "name"
