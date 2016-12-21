@@ -17,6 +17,15 @@ namespace :scraper do
 
       #save post information
       @post.save
+
+      #images
+      @image = Image.new
+      @image.url = result.image_url
+      @image.post_id = @post.id
+
+      #save image
+      @image.save
+
     end
     puts results.businesses[0]
   end
