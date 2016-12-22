@@ -1,0 +1,9 @@
+<div class="filter">
+  <%= form_tag posts_path, method: :get, class: "form-inline" do %> <!-- form_tag on posts path (index), use get method since we are displaying results and not altering/ submitting new data -->
+    <div class="rating form-group">
+      <%= label_tag :rating %>
+      <%= number_field_tag :rating, params[:rating], step: 0.5, min: 0, max: 5, class: "form-control" %>
+      <%= submit_tag "Search", name: nil, class: "btn btn-primary"%>
+    </div>
+  <% end %>
+</div>

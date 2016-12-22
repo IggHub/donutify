@@ -21,7 +21,11 @@
   </p>
 
   <p>
-    <%= image_tag @image.url, class: "thumbnail" %>
+    <% if @image.url.nil? %>
+      <%= image_tag 'donut_image.png', class: 'thumbnail' %>
+    <% else %>
+      <%= image_tag @image.url, class: "thumbnail" %>
+    <% end %>
   </p>
 
   <p>
