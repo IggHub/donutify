@@ -13,6 +13,8 @@ namespace :scraper do
       @post.location = result.location.display_address.join(" ")
       @post.name = result.name
       @post.rating = result.rating
+      @post.latitude = result.location.coordinate.latitude
+      @post.longitude = result.location.coordinate.longitude
 
       #save post information
       @post.save
@@ -29,9 +31,14 @@ namespace :scraper do
     puts results.businesses[0]
   end
 
-  desc "TODO"
+  desc "destroys all posts instances"
   task destroy_all_posts: :environment do
     Post.destroy_all
+  end
+
+  desc "destroys all user instances"
+  task destroy_all_users: :environment do
+    User.destroy_all
   end
 
 end

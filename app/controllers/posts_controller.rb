@@ -9,6 +9,17 @@ class PostsController < ApplicationController
     @posts = Post.all.paginate(:page => params[:page], :per_page => 10)
     @posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
     #@posts = Post.where(open: !params["open"]).paginate(:page => params[:page], :per_page => 10) if params["open"].present?
+    @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
+      marker.lat post.latitude
+      marker.lng post.longitude
+      marker.infowindow post.name
+      marker.picture ({
+        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+        "width":  35,
+        "height": 35
+      })
+      marker.json({name: post.name})
+    end
   end
 
   # GET /posts/1
