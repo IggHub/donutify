@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223153514) do
+ActiveRecord::Schema.define(version: 20161223184421) do
 
   create_table "images", force: :cascade do |t|
     t.text     "url"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20161223153514) do
     t.datetime "updated_at", null: false
     t.string   "latitude"
     t.string   "longitude"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
