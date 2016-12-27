@@ -39,7 +39,7 @@
             <td class="center" style="vertical-align: middle"><%= post.open %></td>
             <td class="center" style="vertical-align: middle"><%= number_to_phone(post.phone, area_code: true) %></td>
             <td class="center" style="vertical-align: middle"><%= post.rating %></td>
-            <td class="center" style="vertical-align: middle"><%= post.location %></td>
+            <td class="center" style="vertical-align: middle" id="address" ><%= post.location %></td>
             <td class="center" style="vertical-align: middle"><%= post.user.name %></td>
 
     <!--        <td><%= link_to 'Edit', edit_post_path(post) %></td>
@@ -56,9 +56,4 @@
   <%= link_to 'New Post', new_post_path %>
   <br />
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
-</div>
-
-
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
 </div>
