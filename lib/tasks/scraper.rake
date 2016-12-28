@@ -4,7 +4,7 @@ namespace :scraper do
   task :scrape, [:city] => [:environment] do |t, args|
 
     ###grabs individual posting data###
-    results = Yelp.client.search(args[:city], {limit: 1, category_filter: "donuts"})
+    results = Yelp.client.search(args[:city], {limit: 3, category_filter: "donuts"})
     results.businesses.each do |result|
       #generate new post instance
       @post = Post.new
