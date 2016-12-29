@@ -1,6 +1,36 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  def scrape
+    Post.destroy_all
+    results = Yelp.client.search(params[:location], {limit: 3, category_filter: "donuts"})
+    results.businesses.each do |result|
+      #generate new post instance
+      @post = Post.new
+      @post.phone = result.phone
+      @post.open = !result.is_closed
+      @post.location = result.location.display_address.join(" ")
+      @post.name = result.name
+      @post.rating = result.rating
+      @post.latitude = result.location.coordinate.latitude
+      @post.longitude = result.location.coordinate.longitude
+      @post.user_id = 1
+      #save post information
+      @post.save
+
+      #images
+      @image = Image.new
+      @image.url = result.image_url
+      @image.post_id = @post.id
+
+      #save image
+      @image.save
+
+    end
+    puts params.inspect
+    redirect_to :posts
+  end
+
   def home
   end
   # GET /posts
@@ -85,6 +115,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:phone, :image_url, :open, :location, :name, :rating)
+      params.require(:post).permit(:phone, :image_url, :open, :location, :name, :rating, :latitude, :longitude)
     end
 end
