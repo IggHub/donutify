@@ -5,13 +5,17 @@
   <%= render 'filter' %>
 
 
-
   <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
     <%= text_field_tag :location %>
-    <%= submit_tag 'Search by location', name: nil %>
+    <%= submit_tag 'Search manually', name: nil %>
   <% end %>
 
-  <%= params.inspect %>
+  <%= "search automatically based on my location" %>
+  <br />
+
+  <%= params.inspect%>
+  <%= debug @lat %>
+  <p>Posts: <%= @lat %></p>
 
   <% if @posts.empty? %>
     <h3>No result found</h3>

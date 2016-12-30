@@ -90,6 +90,7 @@
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
+
       }
 
 
@@ -125,11 +126,13 @@
     <script>
     window.onload = function(){
       var donutContainer = document.getElementById("donut-attributes");
-        donutContainer.addEventListener('click', function(e){
+      donutContainer.addEventListener('click', function(e){
         address = e.target.parentNode.childNodes[11].innerText
         console.log(address);
         });
+      $.post("/scrape?longitude="+pos['lng']+"&latitude="+pos['lat']);
       }
+
     </script>
 
   </body>

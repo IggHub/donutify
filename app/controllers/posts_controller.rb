@@ -3,7 +3,16 @@ class PostsController < ApplicationController
 
   def scrape
     Post.destroy_all
-    results = Yelp.client.search(params[:location], {limit: 3, category_filter: "donuts"})
+
+    #the button will have a built-in logic:
+    #if location is blank, search based on local coordinate (pos)
+    #if location is NOT blank, search based on address given
+
+    #this result is performed IF location is blank. This result is the result based on current coordinate
+    #this result is performed IF location is not blank
+    results = Yelp.client.search(params[:location], {limit: 20, category_filter: "donuts"})
+
+
     results.businesses.each do |result|
       #generate new post instance
       @post = Post.new
@@ -36,6 +45,9 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    @lat = params[:latitude]
+    @lng = params[:longitude]
+
     @posts = Post.all.paginate(:page => params[:page], :per_page => 10)
     @posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
     #@posts = Post.where(open: !params["open"]).paginate(:page => params[:page], :per_page => 10) if params["open"].present?
