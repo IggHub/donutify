@@ -1,57 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
-
-  <%= render 'filter' %>
-
-
-  <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
-    <%= text_field_tag :location %>
-    <%= submit_tag 'Search manually', name: nil %>
-  <% end %>
-
-  <%= "search automatically based on my location" %>
-  <br />
-
-  <%= params.inspect%>
-  <%= debug @lat %>
-  <p>Posts: <%= @lat %></p>
+  <div class="container">
+    <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
+      <%= text_field_tag :location %>
+      <%= submit_tag 'Search manually', name: nil %>
+    <% end %>
+  </div>
+  <div>
+    <%= render 'filter' %>
+  </div>
 
   <% if @posts.empty? %>
     <h3>No result found</h3>
   <% else %>
     <table id="donut-attributes" class="table table-hover table-condensed">
-      <thead>
-        <tr>
-          <th class="center">Preview</th>
-          <th class="center" width = "30%">Name</th>
-          <th class="center">Open?</th>
-          <th class="center">Phone</th>
-          <th class="center">Rating</th>
-          <th class="center">Location</th>
-          <th class="center">User</th>
-
-          <th colspan="3"></th>
-        </tr>
-      </thead>
 
       <tbody>
         <% @posts.each do |post| %>
           <tr>
-            <td width="11%" height="100px">
+            <td rowspan=5 width="100px" height="100px">
                 <% if post.image.url.nil? %>
-                  <%= image_tag 'donut_image.png', class: 'thumbnail' %>
+                  <%= image_tag 'donut_image.png', class: 'thumbnail', style:'width:100px;height:100px;' %>
                 <% else %>
                   <%= image_tag post.image.url, class: 'thumbnail' %>
                 <% end %>
             </td>
-            <td class="center" style="vertical-align: middle"><%= link_to post.name, post %></td>
-            <td class="center" style="vertical-align: middle"><%= post.open %></td>
-            <td class="center" style="vertical-align: middle"><%= number_to_phone(post.phone, area_code: true) %></td>
-            <td class="center" style="vertical-align: middle"><%= post.rating %></td>
-            <td class="center" style="vertical-align: middle" id="address" ><%= post.location %></td>
-            <td class="center" style="vertical-align: middle"><%= post.user.name %></td>
-
+            <div>
+              <tr>
+                <td class="center" style="vertical-align: middle"><%= link_to post.name, post %></td>
+              </tr>
+              <tr>
+                <td class="center" style="vertical-align: middle"><%= number_to_phone(post.phone, area_code: true) %></td>
+              </tr>
+              <tr>
+                <td class="center" style="vertical-align: middle"><%= post.rating %></td>
+              </tr>
+              <tr>
+                <td class="center" style="vertical-align: middle" id="address" ><%= post.location %></td>
+              </tr>
+            </div>
     <!--        <td><%= link_to 'Edit', edit_post_path(post) %></td>
             <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     -->
@@ -61,9 +48,5 @@
     <% end %>
   </table>
 
-  <br>
-
-  <%= link_to 'New Post', new_post_path %>
-  <br />
+<!--  <%= link_to 'New Post', new_post_path %>-->
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
-</div>

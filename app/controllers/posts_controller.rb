@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
     #this result is performed IF location is blank. This result is the result based on current coordinate
     #this result is performed IF location is not blank
-    results = Yelp.client.search(params[:location], {limit: 20, category_filter: "donuts"})
+    results = Yelp.client.search(params[:location], {limit: 10, category_filter: "donuts"})
 
 
     results.businesses.each do |result|
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
     @lat = params[:latitude]
     @lng = params[:longitude]
 
-    @posts = Post.all.paginate(:page => params[:page], :per_page => 10)
+    @posts = Post.all.paginate(:page => params[:page], :per_page => 3)
     @posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
     #@posts = Post.where(open: !params["open"]).paginate(:page => params[:page], :per_page => 10) if params["open"].present?
     @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
