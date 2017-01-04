@@ -10,7 +10,7 @@ class PostsController < ApplicationController
 
     #this result is performed IF location is blank. This result is the result based on current coordinate
     #this result is performed IF location is not blank
-    results = Yelp.client.search(params[:location], {limit: 10, category_filter: "donuts"})
+    results = Yelp.client.search(params[:location], {limit: 3, category_filter: "donuts"})
 
 
     results.businesses.each do |result|
