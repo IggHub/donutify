@@ -43,7 +43,11 @@
         };
 
 
-        document.getElementById('donut-attributes').addEventListener('click', onChangeHandler);
+        var don = document.getElementById('donut-attributes');
+        if(don){
+          don.addEventListener('click', onChangeHandler);
+        };
+
         //start location
         var infoWindow = new google.maps.InfoWindow({map: map});
         if (navigator.geolocation) {
@@ -87,7 +91,7 @@
           }
         });
 
-        console.log(pos.lat);
+
       }
     </script>
 
@@ -103,7 +107,7 @@
 
       var getAddress = function(){
 
-        alert("hello");
+        alert("figure out how to get the element that is being clicked");
       }
 
       if (donutContainer){ //if it is not null, then:
@@ -112,7 +116,6 @@
           }
         }
       }
-
     </script>
 
   </body>
