@@ -100,22 +100,23 @@
     </script>
 
     <script>
-    window.onload = function(){
-      var donutContainer = document.getElementsByClassName("donut-attributes");
-
-      alert(donutContainer[0]); //test if donutContainer is undefined/not
-
-      var getAddress = function(){
-
-        alert("figure out how to get the element that is being clicked");
-      }
-
-      if (donutContainer){ //if it is not null, then:
-        for (var i = 0; i < donutContainer.length; i++){
-          donutContainer[i].addEventListener('click', getAddress, false);
-          }
+    window.addEventListener('DOMContentLoaded', function(){
+      var donutContainer = document.getElementById("donut-attributes");
+      donutContainer.addEventListener('click', function(e){
+        // Get the clicked element
+        var el = e.target;
+        // Find row that contains (or is) the clicked element
+        while (el.tagName !== 'TR') {
+            if (el === this) return; // give up
+            el = el.parentNode;
         }
-      }
+        // Get last row within group of rows
+        el = this.rows[el.rowIndex - el.rowIndex % 5 + 4];
+        // Get its text
+        address = el.cells[0].textContent;
+        alert(address);
+      });
+    });
     </script>
 
   </body>

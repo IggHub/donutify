@@ -13,32 +13,37 @@
   <% if @posts.empty? %>
     <h3>No result found</h3>
   <% else %>
-    <table class="table table-condensed donut-attributes">
+
+    <table class="table table-condensed" id="donut-attributes">
       <tbody class="table-hover">
         <% @posts.each do |post| %>
-          <tr address="<%= post.location %>">
 
+          <tr address="<%= post.location %>" id="address-location">
             <td rowspan=5>
-                <% if post.image.url.nil? %>
-                  <%= image_tag 'donut_image.png', class: 'thumbnail', style:'width:100px;height:100px;' %>
-                <% else %>
-                  <%= image_tag post.image.url, class: 'thumbnail' %>
-                <% end %>
+              <% if post.image.url.nil? %>
+                <%= image_tag 'donut_image.png', class: 'thumbnail', style:'width:100px;height:100px;' %>
+              <% else %>
+                <%= image_tag post.image.url, class: 'thumbnail' %>
+              <% end %>
             </td>
-              <tr>
-                <td class="center" style="vertical-align: middle"><%= link_to post.name, post %></td>
-              </tr>
-              <tr>
-                <td class="center" style="vertical-align: middle"><%= number_to_phone(post.phone, area_code: true) %></td>
-              </tr>
-              <tr>
-                <td class="center" style="vertical-align: middle"><%= post.rating %></td>
-              </tr>
-              <tr>
-                <td class="center" style="vertical-align: middle" id="address" ><%= post.location %></td>
-              </tr>
-
           </tr>
+
+          <tr>
+            <td class="center" style="vertical-align: middle"><%= link_to post.name, post %></td>
+          </tr>
+
+          <tr>
+            <td class="center" style="vertical-align: middle"><%= number_to_phone(post.phone, area_code: true) %></td>
+          </tr>
+
+          <tr>
+            <td class="center" style="vertical-align: middle"><%= post.rating %></td>
+          </tr>
+
+          <tr>
+            <td class="center" style="vertical-align: middle" id="address" ><%= post.location %></td>
+          </tr>
+
         <% end %>
       </tbody>
     <% end %>
