@@ -23,8 +23,6 @@
         </div>
       </div>
 
-
-
     <script>
       var pos = {}; //global var
       var address = "";
@@ -42,10 +40,9 @@
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
 
-
         var don = document.getElementById('donut-attributes');
         if(don){
-          don.addEventListener('click', onChangeHandler);
+          don.addEventListener('click', onChangeHandler); //gets direction displayed on map via onChangeHandler
         };
 
         //start location
@@ -70,7 +67,6 @@
 
       }
 
-
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);
         infoWindow.setContent(browserHasGeolocation ?
@@ -90,8 +86,6 @@
             window.alert('Directions request failed due to ' + status);
           }
         });
-
-
       }
     </script>
 
@@ -114,6 +108,7 @@
         el = this.rows[el.rowIndex - el.rowIndex % 5 + 4];
         // Get its text
         address = el.cells[0].textContent;
+        //one way to pass the address: window.address?
         alert(address);
       });
     });
