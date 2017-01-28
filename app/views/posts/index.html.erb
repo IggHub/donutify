@@ -1,15 +1,22 @@
 <p id="notice"><%= notice %></p>
 
   <div class="container">
-    <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
-      <%= text_field_tag :location %>
-      <%= submit_tag 'Search manually', name: nil %>
-    <% end %>
-  </div>
-  <div>
     <%= render 'filter' %>
   </div>
 
+  <div class="form-group container">
+    <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
+      <div class="form-group">
+        <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%" %>
+      </div>
+      <div class="form-group">
+        <%= submit_tag 'Search Donut', name: nil, class: 'btn btn-success'%>
+      </div>
+    <% end %>
+  </div>
+
+
+<div class="center-block">
   <% if @posts.empty? %>
     <h3>No result found</h3>
   <% else %>
@@ -23,7 +30,7 @@
               <% if post.image.url.nil? %>
                 <%= image_tag 'donut_image.png', class: 'thumbnail', style:'width:100px;height:100px;' %>
               <% else %>
-                <%= image_tag post.image.url, class: 'thumbnail' %>
+                <%= image_tag post.image.url, class: 'thumbnail', style:"width:100px;height:100px;" %>
               <% end %>
             </td>
           </tr>
@@ -54,3 +61,4 @@
 <!--
 <%= image_tag 'city.png', style:'position:fixed;bottom:0px;' %>
 -->
+</div>
