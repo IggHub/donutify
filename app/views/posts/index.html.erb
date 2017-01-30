@@ -1,40 +1,36 @@
 <p id="notice"><%= notice %></p>
 
-  <div class="container">
-    <%= render 'filter' %>
-  </div>
+<div class="container">
+  <%= render 'filter' %>
+</div>
 
-  <div class="form-group container">
-    <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
-      <div class="form-group">
-        <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%" %>
-      </div>
-      <div class="form-group">
-        <%= submit_tag 'Search Donut', name: nil, class: 'btn btn-success search-button'%>
-      </div>
-    <% end %>
-  </div>
+<div class="form-group container">
+  <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
+    <div class="form-group">
+      <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%" %>
+    </div>
+    <div class="form-group">
+      <%= submit_tag 'Search Donut', name: nil, class: 'btn btn-success search-button'%>
+    </div>
+  <% end %>
+</div>
 
 
 <div class="center-block">
   <% if @posts.empty? %>
     <h3>No result found</h3>
   <% else %>
-
-<div class="donut-results">
-
   <% @posts.each do |post| %>
   <div>
     <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
       <%= post.name %>
     </a>
-
-    <div id='<%= "collapse_#{post.id}" %>' class="custom collapse">
-      Test one two three <%= post.name %>
+    <div id='<%= "collapse_#{post.id}" %>' class="collapse">
+      <div class="donut-content">
+        some text
+        Bacon ipsum dolor amet sirloin ground round turkey, chuck shank flank bresaola meatball t-bone venison doner. Venison pig biltong turducken, beef ribs rump chuck beef tail ground round salami. Ribeye pork boudin tenderloin rump, bacon prosciutto porchetta burgdoggen ball tip pork loin picanha flank meatball hamburger. Brisket hamburger swine spare ribs, sausage capicola short ribs ball tip alcatra. Cupim pancetta jerky pork chop turkey.
+      </div>
     </div>
-  </div>
-
-
   <% end %>
 
   <!--
@@ -74,7 +70,7 @@
     <% end %>
   </table>
 -->
-<!--  <%= link_to 'New Post', new_post_path %>-->
+
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
 <!--
 <%= image_tag 'city.png', style:'position:fixed;bottom:0px;' %>
