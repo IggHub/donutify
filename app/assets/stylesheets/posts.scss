@@ -1,3 +1,21 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.custom-btn {
+  background-color: #7CA46E;
+  color: white;
+  margin-top: 20px;
+  border-radius: 0;
+}
+
+.custom {
+  width: 75% !important;
+  min-width: 400px;
+}
+
+.search-button {
+  background-color: #7CA46E;
+  padding: 10px 10px 10px 10px;
+  width: 20%;
+}

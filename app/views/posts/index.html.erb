@@ -10,7 +10,7 @@
         <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%" %>
       </div>
       <div class="form-group">
-        <%= submit_tag 'Search Donut', name: nil, class: 'btn btn-success'%>
+        <%= submit_tag 'Search Donut', name: nil, class: 'btn btn-success search-button'%>
       </div>
     <% end %>
   </div>
@@ -21,7 +21,25 @@
     <h3>No result found</h3>
   <% else %>
 
-    <table class="table table-condensed" id="donut-attributes">
+<div class="donut-results">
+
+  <% @posts.each do |post| %>
+  <div>
+    <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
+      <%= post.name %>
+    </a>
+
+    <div id='<%= "collapse_#{post.id}" %>' class="custom collapse">
+      Test one two three <%= post.name %>
+    </div>
+  </div>
+
+
+  <% end %>
+
+  <!--
+</div>
+    <table class="table table-condensed table-nonfluid" id="donut-attributes">
       <tbody class="table-hover">
         <% @posts.each do |post| %>
 
@@ -55,7 +73,7 @@
       </tbody>
     <% end %>
   </table>
-
+-->
 <!--  <%= link_to 'New Post', new_post_path %>-->
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
 <!--
