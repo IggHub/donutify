@@ -21,14 +21,29 @@
     <h3>No result found</h3>
   <% else %>
   <% @posts.each do |post| %>
+  <style>
+    .custom,
+ {
+      width: 75%;
+      min-width: 400px;
+      display: inline-block;
+    }
+    </style>
   <div>
     <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
       <%= post.name %>
     </a>
     <div id='<%= "collapse_#{post.id}" %>' class="collapse">
-      <div class="donut-content">
-        some text
-        Bacon ipsum dolor amet sirloin ground round turkey, chuck shank flank bresaola meatball t-bone venison doner. Venison pig biltong turducken, beef ribs rump chuck beef tail ground round salami. Ribeye pork boudin tenderloin rump, bacon prosciutto porchetta burgdoggen ball tip pork loin picanha flank meatball hamburger. Brisket hamburger swine spare ribs, sausage capicola short ribs ball tip alcatra. Cupim pancetta jerky pork chop turkey.
+      <div style="text-align:center;">
+        <h2><%= post.name %></h2>
+        <% if post.image.url.nil? %>
+          <%= image_tag 'donut_image.png', class: 'img-circle', style:'width:15%;height:15%;' %>
+        <% else %>
+          <%= image_tag post.image.url, class: 'img-circle', style:"width:15%;height:15%;" %>
+        <% end %>
+        <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location%></h3>
+        <h3><%= number_to_phone(post.phone, area_code: true) %></h3>
+        <p><%= post.rating %></p>
       </div>
     </div>
   <% end %>

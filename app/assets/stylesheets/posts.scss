@@ -12,6 +12,7 @@
 .custom {
   width: 75%;
   min-width: 400px;
+  display: inline-block;
 }
 
 .search-button {
@@ -22,4 +23,5 @@
 
 .donut-content {
   text-align: center;
+  max-width: 75%;
 }
