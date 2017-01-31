@@ -1,9 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
-  <%= render 'filter' %>
-</div>
-
 <div class="form-group container">
   <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
     <div class="form-group">
@@ -41,7 +37,7 @@
         <% else %>
           <%= image_tag post.image.url, class: 'img-circle', style:"width:15%;height:15%;" %>
         <% end %>
-        <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location%></h3>
+        <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location, class: "donut-link"%></h3>
         <h3><%= number_to_phone(post.phone, area_code: true) %></h3>
         <p><%= post.rating %></p>
       </div>

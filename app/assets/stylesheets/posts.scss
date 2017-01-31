@@ -19,9 +19,33 @@
   background-color: #7CA46E;
   padding: 10px 10px 10px 10px;
   width: 20%;
+  border-radius: 0;
+  border-color: #7CA46E;
+}
+
+.search-button:hover {
+  background-color: transparent;
+  border-color: #7CA46E;
+  color: #7CA46E;
+  border-width: 0.2em;
 }
 
 .donut-content {
   text-align: center;
   max-width: 75%;
+}
+
+.donut-link:hover {
+  border-color: #7CA46E;
+  color: #FFFFFF;
+  padding: 10px 10px;
+  text-decoration: none;
+}
+
+.donut-link {
+  color: #7CA46E;
+}
+
+.form-group {
+  margin: 25px;
 }

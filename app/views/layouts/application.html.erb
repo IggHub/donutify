@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-    
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
       html, body, .main {
@@ -21,8 +21,9 @@
   <body>
     <div class="text-center">
       <div class="row">
-        <h1>Some Header</h1>
-        <h4>Some Sub-Header</h4>
+        <h1 class="header">Donutify</h1>
+        <h4 class="sub-header">Donut resist. Resistance is futile.</h4>
+        <div class="content">
           <%= yield %>
       </div>
     </div>
