@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
+<h4 class="sub-header">Donut resist. Resistance is futile.</h4>
 
-<div class="form-group container">
+<div class="form-group">
   <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
     <div class="form-group">
       <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%" %>
@@ -37,9 +38,21 @@
         <% else %>
           <%= image_tag post.image.url, class: 'img-circle', style:"width:15%;height:15%;" %>
         <% end %>
+        <h1>
+          <% if ((post.rating % 1).round ==1) %>
+            <% post.rating.floor.times do |el| %>
+              <i class='fa fa-star' aria-hidden='true'></i>
+            <% end %>
+            <i class='fa fa-star-half' aria-hidden='true'></i>
+          <% else %>
+            <% post.rating.floor.times do |el| %>
+              <i class='fa fa-star' aria-hidden='true'></i>
+            <% end %>
+          <% end %>
+        </h1>
         <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location, class: "donut-link"%></h3>
         <h3><%= number_to_phone(post.phone, area_code: true) %></h3>
-        <p><%= post.rating %></p>
+
       </div>
     </div>
   <% end %>
@@ -83,7 +96,5 @@
 -->
 
   <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
-<!--
-<%= image_tag 'city.png', style:'position:fixed;bottom:0px;' %>
--->
+
 </div>

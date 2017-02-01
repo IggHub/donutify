@@ -3,12 +3,12 @@
   <head>
     <title>Donutify</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://use.fontawesome.com/53000e17f3.js"></script>
     <style>
       html, body, .main {
         width: 100%;
@@ -19,14 +19,18 @@
     </style>
   </head>
   <body>
-    <div class="text-center">
-      <div class="row">
-        <h1 class="header">Donutify</h1>
-        <h4 class="sub-header">Donut resist. Resistance is futile.</h4>
-        <div class="content">
-          <%= yield %>
+    <div class="container">
+      <div class="text-center">
+        <div class="row">
+          <h1 class="header">Donutify</h1>
+
+          <div class="content">
+            <%= yield %>
+          </div>
+        </div>
+
+        <%= render 'layouts/footer' %>
       </div>
     </div>
-
   </body>
 </html>

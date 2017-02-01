@@ -38,3 +38,32 @@ body {
   color: #7CA46E;
   font-family: 'PT Sans', sans-serif;
 }
+
+.footer {
+  color: #747474;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5em;
+  margin: 30px;
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+}
+
+.about-me {
+  color: #747474;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.5em;
+  margin: 5px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+}
+.yelp-link {
+  color: #D32323;
+}
+
+.yelp-link:hover {
+  background-color: #D32323;
+  text-decoration: none;
+  color: #FFFFFF;
+  padding: 0.2em;
+  text-transform: uppercase;
+}
