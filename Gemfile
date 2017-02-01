@@ -31,23 +31,26 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 ## new project gems ##
-#yelp gem to connect to Yelp API
+
 gem 'yelp', require: 'yelp'
-#hide stuff
 gem "figaro"
-#make it pretty
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
-#determine user latitude and longitude
 gem 'geocoder'
-#sets up google maps
 gem 'gmaps4rails'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'sqlite3'
+  gem 'rspec-rails', '~>3.4'
+  gem 'factory_girl_rails', '~> 4.5.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+  gem 'faker', '~> 1.6.1'
 end
 
 group :development do
