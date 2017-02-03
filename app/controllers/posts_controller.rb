@@ -14,7 +14,6 @@ class PostsController < ApplicationController
       @post.rating = result.rating
       @post.latitude = result.location.coordinate.latitude
       @post.longitude = result.location.coordinate.longitude
-      @post.user_id = 1
       #save post information
       if @post.save!
         #images
