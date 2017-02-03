@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   def scrape
     Post.destroy_all
     results = Yelp.client.search(params[:location], {limit: 5, category_filter: "donuts"})
-
     results.businesses.each do |result|
       #generate new post instance
       @post = Post.new

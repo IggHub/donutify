@@ -17,84 +17,49 @@
   <% if @posts.empty? %>
     <h3>No result found</h3>
   <% else %>
-  <% @posts.each do |post| %>
-  <style>
-    .custom,
- {
-      width: 75%;
-      min-width: 400px;
-      display: inline-block;
-    }
-    </style>
-  <div>
-    <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
-      <%= post.name %>
-    </a>
-    <div id='<%= "collapse_#{post.id}" %>' class="collapse">
-      <div style="text-align:center;">
-        <h2><%= post.name %></h2>
-        <% if post.image.url.nil? %>
-          <%= image_tag 'donut_image.png', class: 'img-circle', style:'width:15%;height:15%;' %>
-        <% else %>
-          <%= image_tag post.image.url, class: 'img-circle', style:"width:15%;height:15%;" %>
-        <% end %>
-        <h1>
-          <% if ((post.rating % 1).round ==1) %>
-            <% post.rating.floor.times do |el| %>
-              <i class='fa fa-star' aria-hidden='true'></i>
-            <% end %>
-            <i class='fa fa-star-half' aria-hidden='true'></i>
-          <% else %>
-            <% post.rating.floor.times do |el| %>
-              <i class='fa fa-star' aria-hidden='true'></i>
-            <% end %>
-          <% end %>
-        </h1>
-        <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location, class: "donut-link"%></h3>
-        <h3><%= number_to_phone(post.phone, area_code: true) %></h3>
+    <% @posts.each do |post| %>
+    <style>
+      .custom,
+      {
+        width: 75%;
+        min-width: 400px;
+        display: inline-block;
+      }
+      </style>
+    <div>
+      <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
+        <%= post.name %>
+      </a>
+      <div id='<%= "collapse_#{post.id}" %>' class="collapse">
+        <div style="text-align:center;">
+          <h2><%= post.name %></h2>
 
+          <% if post.image.url.nil? %>
+            <%= image_tag 'donut_image.png', class: 'img-circle', style:'width:15%;height:15%;' %>
+          <% else %>
+            <%= image_tag post.image.url, class: 'img-circle', style:"width:15%;height:15%;" %>
+          <% end %>
+          <h1>
+
+            <% if ((post.rating % 1).round ==1) %>
+              <% post.rating.floor.times do |el| %>
+                <i class='fa fa-star' aria-hidden='true'></i>
+              <% end %>
+
+              <i class='fa fa-star-half' aria-hidden='true'></i>
+            <% else %>
+              <% post.rating.floor.times do |el| %>
+                <i class='fa fa-star' aria-hidden='true'></i>
+              <% end %>
+            <% end %>
+
+          </h1>
+          <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location, class: "donut-link"%></h3>
+          <h3><%= number_to_phone(post.phone, area_code: true) %></h3>
+        </div>
       </div>
+
+    <% end %>
     </div>
   <% end %>
-
-  <!--
-</div>
-    <table class="table table-condensed table-nonfluid" id="donut-attributes">
-      <tbody class="table-hover">
-        <% @posts.each do |post| %>
-
-          <tr address="<%= post.location %>" id="address-location">
-            <td rowspan=5>
-              <% if post.image.url.nil? %>
-                <%= image_tag 'donut_image.png', class: 'thumbnail', style:'width:100px;height:100px;' %>
-              <% else %>
-                <%= image_tag post.image.url, class: 'thumbnail', style:"width:100px;height:100px;" %>
-              <% end %>
-            </td>
-          </tr>
-
-          <tr>
-            <td class="center" style="vertical-align: middle"><%= link_to post.name, post %></td>
-          </tr>
-
-          <tr>
-            <td class="center" style="vertical-align: middle"><%= number_to_phone(post.phone, area_code: true) %></td>
-          </tr>
-
-          <tr>
-            <td class="center" style="vertical-align: middle"><%= post.rating %></td>
-          </tr>
-
-          <tr>
-            <td class="center" style="vertical-align: middle" id="address" ><%= post.location %></td>
-          </tr>
-
-        <% end %>
-      </tbody>
-    <% end %>
-  </table>
--->
-
-  <%= will_paginate @posts, renderer: BootstrapPagination::Rails  %>
-
 </div>
