@@ -16,15 +16,15 @@ class PostsController < ApplicationController
       @post.longitude = result.location.coordinate.longitude
       @post.user_id = 1
       #save post information
-      @post.save
+      if @post.save!
+        #images
+        @image = Image.new
+        @image.url = result.image_url
+        @image.post_id = @post.id
 
-      #images
-      @image = Image.new
-      @image.url = result.image_url
-      @image.post_id = @post.id
-
-      #save image
-      @image.save
+        #save image
+        @image.save!
+      end
 
     end
     puts params.inspect
