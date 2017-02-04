@@ -4,7 +4,7 @@
 <div class="form-group">
   <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
     <div class="form-group">
-      <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%" %>
+      <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%", :required => true %>
     </div>
     <div class="form-group">
       <%= submit_tag 'Show me the Donut!', name: nil, class: 'btn btn-success search-button'%>
@@ -14,10 +14,10 @@
 
 
 <div class="center-block">
-  <% if @posts.empty? %>
+  <% if @results.blank? %>
     <h3>No result found</h3>
   <% else %>
-    <% @posts.each do |post| %>
+    <% @results.each do |post| %>
     <style>
       .custom,
       {
