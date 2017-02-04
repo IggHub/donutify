@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <h4 class="sub-header">Donut resist. Resistance is futile.</h4>
 
 <div class="form-group">
@@ -14,10 +13,10 @@
 
 
 <div class="center-block">
-  <% if @results.blank? %>
+  <% if @posts.blank? %>
     <h3>No result found</h3>
   <% else %>
-    <% @results.each do |post| %>
+    <% @posts.each do |post| %>
     <style>
       .custom,
       {
@@ -26,6 +25,7 @@
         display: inline-block;
       }
       </style>
+      <p id="notice"><%= notice %></p>
     <div>
       <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
         <%= post.name %>
