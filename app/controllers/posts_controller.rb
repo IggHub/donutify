@@ -3,34 +3,13 @@ class PostsController < ApplicationController
 
   def scrape
     begin
-      Post.destroy_all
-      results = Yelp.client.search(params[:location], {limit: 5, category_filter: "donuts"})
+
+      @results = Yelp.client.search(params[:location], {limit: 5, category_filter: "donuts"})
     rescue Yelp::Error::UnavailableForLocation => e
       redirect_to root_url, notice: e.message and return
     end
-      results.businesses.each do |result|
-        #generate new post instance
-        @post = Post.new
-        @post.phone = result.phone
-        @post.open = !result.is_closed
-        @post.location = result.location.display_address.join(" ")
-        @post.name = result.name
-        @post.rating = result.rating
-        @post.latitude = result.location.coordinate.latitude
-        @post.longitude = result.location.coordinate.longitude
-        #save post information
-        if @post.save!
-          #images
-          @image = Image.new
-          @image.url = result.image_url
-          @image.post_id = @post.id
-
-          #save image
-          @image.save!
-        end
-      end
       puts params.inspect
-    redirect_to :posts
+    render :index
   end
 
   def home

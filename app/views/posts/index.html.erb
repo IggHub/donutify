@@ -1,7 +1,7 @@
 <h4 class="sub-header">Donut resist. Resistance is futile.</h4>
 
 <div class="form-group">
-  <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :post) do %>
+  <%= form_tag({:controller=>"posts", :action=>"scrape"}, method: :get) do %>
     <div class="form-group">
       <%= text_field_tag :location, nil, class: 'form-control input-lg text-center center-block', placeholder: 'Location', style:"width: 50%", :required => true %>
     </div>
@@ -13,10 +13,10 @@
 
 
 <div class="center-block">
-  <% if @posts.blank? %>
+  <% if @results.blank? %>
     <h3>No result found</h3>
   <% else %>
-    <% @posts.each do |post| %>
+    <% @results.businesses.each do |post| %>
     <style>
       .custom,
       {
@@ -25,7 +25,7 @@
         display: inline-block;
       }
       </style>
-      
+
     <div>
       <a data-toggle="collapse" class="btn btn-lg custom-btn custom" data-parent="#accordion" href='<%= "#collapse_#{post.id}" %>' aria-expanded="false">
         <%= post.name %>
@@ -34,10 +34,10 @@
         <div style="text-align:center;">
           <h2><%= post.name %></h2>
 
-          <% if post.image.url.nil? %>
+          <% if post.url.nil? %>
             <%= image_tag 'donut_image.png', class: 'img-circle', style:'width:15%;height:15%;' %>
           <% else %>
-            <%= image_tag post.image.url, class: 'img-circle', style:"width:15%;height:15%;" %>
+            <%= image_tag post.url, class: 'img-circle', style:"width:15%;height:15%;" %>
           <% end %>
           <h1>
 
@@ -54,7 +54,7 @@
             <% end %>
 
           </h1>
-          <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location, class: "donut-link"%></h3>
+          <h3><%=link_to post.location, 'http://maps.google.com/?q=' + post.location.to_s, class: "donut-link"%></h3>
           <h3><%= number_to_phone(post.phone, area_code: true) %></h3>
         </div>
       </div>
