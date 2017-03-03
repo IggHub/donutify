@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # GET /users
-  # GET /users.json
+  #Locate User locations (latitude and longitude). Currently not implemented
   def index
     @users = User.all
     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
@@ -17,22 +16,17 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
+  #create new user
   def create
     @user = User.new(user_params)
 
@@ -47,8 +41,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
+  #edit user
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -61,8 +54,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|

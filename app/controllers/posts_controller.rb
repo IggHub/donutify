@@ -1,61 +1,41 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
+  #scrape fetches data from Yelp API
   def scrape
     begin
-
       @results = Yelp.client.search(params[:location], {limit: 5, category_filter: "donuts"})
+  #Anticipating location error if user enters nonexistent location
     rescue Yelp::Error::UnavailableForLocation => e
       redirect_to root_url, notice: e.message and return
     end
-      puts params.inspect
+  #inspects params
+    puts params.inspect
     render :index
   end
 
   def home
   end
-  # GET /posts
-  # GET /posts.json
-  def index
-    @lat = params[:latitude]
-    @lng = params[:longitude]
 
+#pagination on index
+  def index
     @posts = Post.all.paginate(:page => params[:page], :per_page => 5)
     @posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
-    #@posts = Post.where(open: !params["open"]).paginate(:page => params[:page], :per_page => 10) if params["open"].present?
-    @hash = Gmaps4rails.build_markers(@posts) do |post, marker|
-      marker.lat post.latitude
-      marker.lng post.longitude
-      marker.infowindow post.name
-      marker.picture ({
-        "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-        "width":  35,
-        "height": 35
-      })
-      marker.json({name: post.name})
-    end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @image = @post.image
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
   end
 
-  # GET /posts/1/edit
   def edit
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = Post.new(post_params)
-
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -67,8 +47,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -81,8 +59,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
@@ -92,7 +68,7 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Use callbacks to share common setup or constraints between action
     def set_post
       @post = Post.find(params[:id])
     end

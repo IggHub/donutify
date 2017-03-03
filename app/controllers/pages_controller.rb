@@ -1,3 +1,4 @@
+#pages no longer used
 class PagesController < ApplicationController
   def about
   end

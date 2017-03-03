@@ -1,3 +1,4 @@
+#implements star to display stars 
 module PostsHelper
   def star_rating(rating, star, half_star)
     star = star

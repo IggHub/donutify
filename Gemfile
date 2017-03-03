@@ -38,6 +38,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'capybara'
 
 group :development, :test do
   gem 'byebug', platform: :mri
