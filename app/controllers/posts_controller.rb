@@ -1,40 +1,36 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-  #scrape fetches data from Yelp API
   def scrape
     begin
       @results = Yelp.client.search(params[:location], {limit: 5, category_filter: "donuts"})
-  #Anticipating location error if user enters nonexistent location
     rescue Yelp::Error::UnavailableForLocation => e
       redirect_to root_url, notice: e.message and return
     end
-  #inspects params
-    puts params.inspect
     render :index
   end
 
   def home
   end
 
-#pagination on index
   def index
     @posts = Post.all.paginate(:page => params[:page], :per_page => 5)
-    @posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
+    #@posts = Post.where("rating >= ?", params["rating"]).paginate(:page => params[:page], :per_page => 10) if params["rating"].present?
   end
 
   def show
-    @image = @post.image
+#    @image = @post.image
   end
 
   def new
-    @post = Post.new
+#    @post = Post.new
   end
 
   def edit
   end
 
   def create
+=begin
     @post = Post.new(post_params)
     respond_to do |format|
       if @post.save
@@ -45,9 +41,11 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+=end
   end
 
   def update
+=begin
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -57,6 +55,7 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+=end
   end
 
   def destroy
